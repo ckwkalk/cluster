@@ -152,11 +152,35 @@ dotplot(sorted.loadings3, main=Main3, xlabs=xlabs, cex=1.5, col='red')
 
 
 
+ndG6Sel1520Clust <-Mclust(Swideall_1520.sc[,c("Int1p7mCL_anl_par_poly_15mr20msp_min",
+"Int1p7mCL_anl_par_poly_15mr20msp_avg",
+"Gmf2p4mCL_anl_par_poly_15mr20msp_avgabsdev",
+"Gmf2p4mCL_anl_par_poly_15mr20msp_sdev",
+"Gmf2p4mCL_anl_par_poly_15mr20msp_avg",
+"Gmf2p4mCL_anl_par_poly_15mr20msp_var",
+"Int1p7mCL_anl_par_poly_15mr20msp_max",
+"Int1p7mCL_anl_par_poly_15mr20msp_avgabsdev")], G=6)
+
+nwideall1520$CLUSTnd6tm <- as.factor(nd6$classification)
+
+plot(jitter(as.numeric(nwideall1520$CLUSTnd6tm)), jitter(as.numeric(nwideall1520$CLUSTdtm)))
+
+##ClaraClustering
+
+CndG6Sel1520Clust <-clara(Swideall_1520.sc[,c("Int1p7mCL_anl_par_poly_15mr20msp_min",
+                                              "Int1p7mCL_anl_par_poly_15mr20msp_avg",
+                                              "Gmf2p4mCL_anl_par_poly_15mr20msp_avgabsdev",
+                                              "Gmf2p4mCL_anl_par_poly_15mr20msp_sdev",
+                                              "Gmf2p4mCL_anl_par_poly_15mr20msp_avg",
+                                              "Gmf2p4mCL_anl_par_poly_15mr20msp_var",
+                                              "Int1p7mCL_anl_par_poly_15mr20msp_max",
+                                              "Int1p7mCL_anl_par_poly_15mr20msp_avgabsdev")], 6, samples=60)
 
 
 
+nwideall1520$CLUSTclara <- as.factor(CndG6Sel1520Clust$clustering)
 
-
+ggplot (nwideall1520, aes (x = X, y = Y, colour = CLUSTclara))+ geom_point(shape=1)
 
 
 Cwideall_1520 <- Mclust(wideall_1520)[c(2:16)]
